@@ -110,7 +110,7 @@ else:
 			f.write(pc)
 			
 		with open("vapoursynth-script.pc","w") as f:
-			f.write(pc)
+			f.write(pc_script)
 		
 		os.chdir("..")
 		os.chdir("..")
