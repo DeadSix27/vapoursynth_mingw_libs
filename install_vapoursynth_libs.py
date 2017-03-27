@@ -17,33 +17,33 @@ import sys,os,urllib
 
 SUPPORTED_VERSIONS = ('R37',)
 
-VS_PC = 'prefix=%%PREFIX%%'
-'exec_prefix=${prefix}'
-'libdir=${exec_prefix}/lib'
-'includedir=${prefix}/include/vapoursynth'
-''
-'Name: vapoursynth'
-'Description: A frameserver for the 21st century'
-'Version: 37'
-''
-'Requires.private: zimg'
-'Libs: -L${libdir} -lvapoursynth'
-'Libs.private: -L${libdir} -lzimg -ldl'
+VS_PC = 'prefix=%%PREFIX%%' +
+'exec_prefix=${prefix}' +
+'libdir=${exec_prefix}/lib' +
+'includedir=${prefix}/include/vapoursynth' +
+'' +
+'Name: vapoursynth' +
+'Description: A frameserver for the 21st century' +
+'Version: 37' +
+'' +
+'Requires.private: zimg' +
+'Libs: -L${libdir} -lvapoursynth' +
+'Libs.private: -L${libdir} -lzimg -ldl' +
 'Cflags: -I${includedir}'
 
-VSS_PC = 'prefix=%%PREFIX%%'
-'exec_prefix=${prefix}'
-'libdir=${exec_prefix}/lib'
-'includedir=${prefix}/include/vapoursynth'
-''
-'Name: vapoursynth-script'
-'Description: Library for interfacing VapourSynth with Python'
-'Version: 37'
-''
-'Requires: vapoursynth'
-'Requires.private: python-3.6'
-'Libs: -L${libdir} -lvapoursynth-script'
-'Libs.private: -lpython36'
+VSS_PC = 'prefix=%%PREFIX%%' +
+'exec_prefix=${prefix}' +
+'libdir=${exec_prefix}/lib' +
+'includedir=${prefix}/include/vapoursynth' +
+'' +
+'Name: vapoursynth-script' +
+'Description: Library for interfacing VapourSynth with Python' +
+'Version: 37' +
+'' +
+'Requires: vapoursynth' +
+'Requires.private: python-3.6' +
+'Libs: -L${libdir} -lvapoursynth-script' +
+'Libs.private: -lpython36' +
 'Cflags: -I${includedir}'
 
 def exitHelp():
