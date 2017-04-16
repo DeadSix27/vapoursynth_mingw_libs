@@ -83,7 +83,7 @@ else:
 		os.chdir("work")
 		print("Downloading")
 		os.system("wget https://github.com/vapoursynth/vapoursynth/releases/download/{0}/VapourSynth{1}-Portable-{0}.7z".format(ver,arch))
-		os.system("7za e VapourSynth{1}-Portable-{0}.7z".format(ver,arch))
+		os.system("7za e VapourSynth{1}-Portable-{0}.7z -ao".format(ver,arch))
 		
 		print("Local installing binaries")
 		os.system("cp {0} ../bin".format("VSScript.dll"))
