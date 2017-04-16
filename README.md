@@ -3,14 +3,15 @@
 
 Creates MinGW compatible library files of the Vapoursynth DLLs using gendef/dlltool, for people too lazy to cross compile it.
 
+VS Source: https://github.com/vapoursynth/vapoursynth
+
 ### Supports:
- - VapourSynth R37
- - Win64 and 32 (64 tesred only)
+ - VapourSynth R37 - Win64 and 32 (Only tested the 64bit variant)
 
 ### Requires: 
- - gendef (part of mingw)
+ - gendef (part of MinGW)
  - dlltool (so is this)
- - Python 2
+ - Python 2(+)
 
 ### How to run:
 
