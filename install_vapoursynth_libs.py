@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 
 # #################################################################################################################
-# Copyright (C) 2017 DeadSix27
+# Copyright (C) 2017 DeadSix27 (https://github.com/DeadSix27/vapoursynth_mingw_libs)
 #
-# This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
-# To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/4.0/.
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -12,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # #################################################################################################################
+
 
 import sys,os,urllib
 
@@ -77,15 +79,20 @@ else:
 		gendef  = sys.argv[6]
 		
 		os.system("mkdir work")
+		os.system("mkdir bin")
 		os.chdir("work")
 		print("Downloading")
 		os.system("wget https://github.com/vapoursynth/vapoursynth/releases/download/{0}/VapourSynth{1}-Portable-{0}.7z".format(ver,arch))
 		os.system("7za e VapourSynth{1}-Portable-{0}.7z".format(ver,arch))
 		
+		print("Local installing binaries")
+		os.system("cp {1} ../bin".format("VSScript.dll"))
+		os.system("cp {1} ../bin".format("VapourSynth.dll"))
+		os.system("cp {1} ../bin".format("vapoursynth.cp36-win_amd64.pyd"))
+		os.system("cp {1} ../bin".format("portable.vs"))
 		print("Creating library")
 		os.system("{0} {1}".format(gendef,"VSScript.dll"))
 		os.system("{0} -d {1} -l {2}".format(dlltool,"VSScript.def","libvapoursynth-script.a"))
-		
 		os.system("{0} {1}".format(gendef,"VapourSynth.dll"))
 		os.system("{0} -d {1} -l {2}".format(dlltool,"VapourSynth.def","libvapoursynth.a"))
 		
