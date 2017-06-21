@@ -17,7 +17,7 @@
 
 import sys,os,urllib
 
-SUPPORTED_VERSIONS = ('R37',)
+SUPPORTED_VERSIONS = ('R37','R38')
 
 VS_PC = """prefix=%%PREFIX%% 
 exec_prefix=${prefix} 
@@ -50,7 +50,7 @@ Cflags: -I${includedir}"""
 
 
 def exitHelp():
-	print("install_python_libs.py install/uninstall <64/32> <version> <install_prefix> - e.g install_python_libs.py amd64 3.6.1 /test/cross_compilers/....../")
+	print("install_vapoursynth_libs.py install/uninstall <64/32> <version> <install_prefix> - e.g install_vapoursynth_libs.py amd64 R38 /test/cross_compilers/....../")
 	exit(1)
 def exitVersions():
 	print("Only these versions are supported: " + " ".join(SUPPORTED_VERSIONS))

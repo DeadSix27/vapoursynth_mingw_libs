@@ -11,7 +11,7 @@
 # limitations under the License.
 # #################################################################################################################
 
-PYTHON_VERSION = R37
+VAPOURSYNTH_VERSION = R38
 #64, 32
 ARCH = 64
 ifndef PREFIX
@@ -25,6 +25,6 @@ $(error DLLTOOL is not set)
 endif
 
 all:
-	@python install_vapoursynth_libs.py install $(ARCH) $(PYTHON_VERSION) $(PREFIX) $(DLLTOOL) $(GENDEF)
+	@python install_vapoursynth_libs.py install $(ARCH) $(VAPOURSYNTH_VERSION) $(PREFIX) $(DLLTOOL) $(GENDEF)
 uninstall:
-	@python install_vapoursynth_libs.py uninstall $(ARCH) $(PYTHON_VERSION) $(PREFIX) $(DLLTOOL) $(GENDEF)
+	@python install_vapoursynth_libs.py uninstall $(ARCH) $(VAPOURSYNTH_VERSION) $(PREFIX) $(DLLTOOL) $(GENDEF)
