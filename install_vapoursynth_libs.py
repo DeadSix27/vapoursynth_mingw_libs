@@ -26,7 +26,7 @@ includedir=${prefix}/include/vapoursynth
  
 Name: vapoursynth 
 Description: A frameserver for the 21st century 
-Version: 37 
+Version: %%VERSION%% 
  
 Requires.private: zimg 
 Libs: -L${libdir} -lvapoursynth 
@@ -40,7 +40,7 @@ includedir=${prefix}/include/vapoursynth
  
 Name: vapoursynth-script 
 Description: Library for interfacing VapourSynth with Python 
-Version: 37 
+Version: %%VERSION%%
  
 Requires: vapoursynth 
 Requires.private: python-3.6 
@@ -72,11 +72,12 @@ if len(sys.argv) != 7:
 	exitHelp()
 else:
 	if sys.argv[1] == "install":
-		arch    = sys.argv[2]
-		ver     = sys.argv[3]
-		prefix  = sys.argv[4]
-		dlltool = sys.argv[5]
-		gendef  = sys.argv[6]
+		arch     = sys.argv[2]
+		ver      = sys.argv[3]
+		ver_suff = ver[1:]
+		prefix   = sys.argv[4]
+		dlltool  = sys.argv[5]
+		gendef   = sys.argv[6]
 		
 		os.system("mkdir work")
 		os.system("mkdir bin")
@@ -110,8 +111,8 @@ else:
 		
 		print("Creating pkgconfig")
 		
-		pc_script = VSS_PC.replace('%%PREFIX%%',prefix)
-		pc        = VS_PC.replace('%%PREFIX%%',prefix)
+		pc_script = VSS_PC.replace('%%PREFIX%%',prefix).replace('%%VERSION%%',ver_suff)
+		pc        = VS_PC.replace('%%PREFIX%%',prefix).replace('%%VERSION%%',ver_suff)
 		
 		with open("vapoursynth.pc","w") as f:
 			f.write(pc)
