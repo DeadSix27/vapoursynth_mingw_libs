@@ -129,7 +129,7 @@ else:
 		os.system("wget https://github.com/vapoursynth/vapoursynth/archive/{0}.tar.gz".format(ver))
 		os.system("tar -xvf {0}.tar.gz vapoursynth-{0}/include".format(ver))
 		
-		os.system("mv vapoursynth-R37/include vapoursynth")
+		os.system("mv vapoursynth-{0}/include vapoursynth".format(ver))
 		os.system("rm -r vapoursynth-{0}".format(ver))
 		os.system("rm {0}.tar.gz".format(ver))
 		os.chdir("..")
