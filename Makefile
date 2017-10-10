@@ -11,7 +11,7 @@
 # limitations under the License.
 # #################################################################################################################
 
-VAPOURSYNTH_VERSION = R38
+VAPOURSYNTH_VERSION = R39
 #64, 32
 ARCH = 64
 ifndef PREFIX
