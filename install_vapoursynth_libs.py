@@ -17,7 +17,7 @@
 
 import sys,os,urllib
 
-SUPPORTED_VERSIONS = ('R37','R38','R39')
+SUPPORTED_VERSIONS = ('R37','R38','R39','R40')
 
 VS_PC = """prefix=%%PREFIX%% 
 exec_prefix=${prefix} 
