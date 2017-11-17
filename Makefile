@@ -1,8 +1,9 @@
 # #################################################################################################################
 # Copyright (C) 2017 DeadSix27
 #
-# This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
-# To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/4.0/.
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -11,7 +12,7 @@
 # limitations under the License.
 # #################################################################################################################
 
-VAPOURSYNTH_VERSION = R39
+VAPOURSYNTH_VERSION = R40
 #64, 32
 ARCH = 64
 ifndef PREFIX
