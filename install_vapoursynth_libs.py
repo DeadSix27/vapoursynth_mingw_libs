@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 
 # #################################################################################################################
 # Copyright (C) 2017 DeadSix27 (https://github.com/DeadSix27/vapoursynth_mingw_libs)
