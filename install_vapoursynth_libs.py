@@ -17,6 +17,10 @@
 
 import sys,os,urllib
 
+def is_tool(name):
+        from distutils.spawn import find_executable
+        return find_executable(name) is not None
+
 SUPPORTED_VERSIONS = ('R37','R38','R39','R40')
 
 VS_PC = """prefix=%%PREFIX%% 
@@ -67,7 +71,10 @@ def simplePatch(infile,replacetext,withtext):
 		for line in lines:
 			f2.write(line)
 
-
+if not is_tool("7za"):
+	print("Please install 7za")
+	exit(1)
+			
 if len(sys.argv) != 7:
 	exitHelp()
 else:
