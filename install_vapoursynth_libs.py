@@ -99,7 +99,6 @@ else:
 		os.system("cp {0} ../bin".format("vapoursynth.cp36-win_amd64.pyd"))
 		os.system("cp {0} ../bin".format("portable.vs"))
 		os.system("cp -r {0} ../bin/".format("vapoursynth64"))
-		exit()
 		print("Creating library")
 		os.system("{0} {1}".format(gendef,"VSScript.dll"))
 		os.system("{0} -d {1} -y {2}".format(dlltool,"VSScript.def","libvapoursynth-script.a"))
