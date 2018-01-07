@@ -54,7 +54,7 @@ Cflags: -I${includedir}"""
 
 
 def exitHelp():
-	print("install_vapoursynth_libs.py install/uninstall <64/32> <version> <install_prefix> - e.g install_vapoursynth_libs.py amd64 R39 /test/cross_compilers/....../")
+	print("install_vapoursynth_libs.py install/uninstall <64/32> <version> <install_prefix> <dlltool> <gendef> - e.g install_vapoursynth_libs.py 64 R40 /test/cross_compilers/....../ DLLTOOLPATH GENDEFPATH")
 	exit(1)
 def exitVersions():
 	print("Only these versions are supported: " + " ".join(SUPPORTED_VERSIONS))
@@ -71,10 +71,10 @@ def simplePatch(infile,replacetext,withtext):
 		for line in lines:
 			f2.write(line)
 
-if not is_tool("7za"):
-	print("Please install 7za")
+if not is_tool("7z"):
+	print("Please install 7z")
 	exit(1)
-			
+
 if len(sys.argv) != 7:
 	exitHelp()
 else:
@@ -91,18 +91,20 @@ else:
 		os.chdir("work")
 		print("Downloading")
 		os.system("wget https://github.com/vapoursynth/vapoursynth/releases/download/{0}/VapourSynth{1}-Portable-{0}.7z".format(ver,arch))
-		os.system('7za e -aoa "VapourSynth{1}-Portable-{0}.7z"'.format(ver,arch))
+		os.system('7z x -aoa "VapourSynth{1}-Portable-{0}.7z"'.format(ver,arch))
 		
 		print("Local installing binaries")
 		os.system("cp {0} ../bin".format("VSScript.dll"))
 		os.system("cp {0} ../bin".format("VapourSynth.dll"))
 		os.system("cp {0} ../bin".format("vapoursynth.cp36-win_amd64.pyd"))
 		os.system("cp {0} ../bin".format("portable.vs"))
+		os.system("cp -r {0} ../bin/".format("vapoursynth64"))
+		exit()
 		print("Creating library")
 		os.system("{0} {1}".format(gendef,"VSScript.dll"))
-		os.system("{0} -d {1} -l {2}".format(dlltool,"VSScript.def","libvapoursynth-script.a"))
+		os.system("{0} -d {1} -y {2}".format(dlltool,"VSScript.def","libvapoursynth-script.a"))
 		os.system("{0} {1}".format(gendef,"VapourSynth.dll"))
-		os.system("{0} -d {1} -l {2}".format(dlltool,"VapourSynth.def","libvapoursynth.a"))
+		os.system("{0} -d {1} -y {2}".format(dlltool,"VapourSynth.def","libvapoursynth.a"))
 		
 		
 		os.system("mkdir lib")
