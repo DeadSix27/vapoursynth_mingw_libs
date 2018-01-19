@@ -21,7 +21,7 @@ def is_tool(name):
         from distutils.spawn import find_executable
         return find_executable(name) is not None
 
-SUPPORTED_VERSIONS = ('R37','R38','R39','R40')
+SUPPORTED_VERSIONS = ('R37','R38','R39','R40','R41','R42','R42.1')
 
 VS_PC = """prefix=%%PREFIX%% 
 exec_prefix=${prefix} 
@@ -54,7 +54,7 @@ Cflags: -I${includedir}"""
 
 
 def exitHelp():
-	print("install_vapoursynth_libs.py install/uninstall <64/32> <version> <install_prefix> <dlltool> <gendef> - e.g install_vapoursynth_libs.py 64 R40 /test/cross_compilers/....../ DLLTOOLPATH GENDEFPATH")
+	print("install_vapoursynth_libs.py install/uninstall <64/32> <version> <install_prefix> <dlltool> <gendef> - e.g install_vapoursynth_libs.py 64 R42.1 /test/cross_compilers/....../ DLLTOOLPATH GENDEFPATH")
 	exit(1)
 def exitVersions():
 	print("Only these versions are supported: " + " ".join(SUPPORTED_VERSIONS))
