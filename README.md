@@ -6,7 +6,7 @@ Creates MinGW compatible library files of the Vapoursynth DLLs using gendef/dllt
 VS Source: https://github.com/vapoursynth/vapoursynth
 
 ### Supports:
- - VapourSynth R37,38,39 - Win64 and 32 (Only tested the 64bit variant)
+ - VapourSynth R37,38,39,40,41,42,42.1,43 - Win64 and 32 (Only tested the 64bit variant)
 
 ### Requires: 
  - gendef (part of MinGW)
