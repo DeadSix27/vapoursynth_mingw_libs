@@ -34,7 +34,7 @@ Version: %%VERSION%%
  
 Requires.private: zimg 
 Libs: -L${libdir} -lvapoursynth 
-Libs.private: -L${libdir} -lzimg -ldl 
+Libs.private: -L${libdir} -lzimg
 Cflags: -I${includedir}"""
 
 VSS_PC = """prefix=%%PREFIX%% 
