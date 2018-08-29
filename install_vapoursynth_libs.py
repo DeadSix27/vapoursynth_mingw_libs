@@ -71,8 +71,8 @@ def simplePatch(infile,replacetext,withtext):
 		for line in lines:
 			f2.write(line)
 
-if not is_tool("7z"):
-	print("Please install 7z")
+if not is_tool("rsync") or not is_tool("7z"):
+	print("Please make sure that p7zip and rsync are installed.")
 	exit(1)
 
 if len(sys.argv) != 7:
