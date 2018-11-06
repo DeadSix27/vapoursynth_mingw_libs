@@ -91,8 +91,8 @@ else:
 		dlltool  = sys.argv[5]
 		gendef   = sys.argv[6]
 		
-		runCmd("mkdir work")
-		runCmd("mkdir bin")
+		runCmd("mkdir -p work")
+		runCmd("mkdir -p bin")
 		os.chdir("work")
 		print("Downloading")
 		runCmd("wget https://github.com/vapoursynth/vapoursynth/releases/download/{0}/VapourSynth{1}-Portable-{0}.7z".format(ver,arch))
