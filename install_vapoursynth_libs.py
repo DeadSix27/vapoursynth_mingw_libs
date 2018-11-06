@@ -96,7 +96,10 @@ else:
 		print("Local installing binaries")
 		os.system("cp {0} ../bin".format("VSScript.dll"))
 		os.system("cp {0} ../bin".format("VapourSynth.dll"))
-		os.system("cp {0} ../bin".format("vapoursynth.cp36-win_amd64.pyd"))
+		pydName = "vapoursynth.cp36-win_amd64.pyd"
+		if ver == "R45":
+			pydName = "vapoursynth.cp37-win_amd64.pyd"
+		os.system("cp {0} ../bin".format(pydName))
 		os.system("cp {0} ../bin".format("portable.vs"))
 		os.system("cp -r {0} ../bin/".format("vapoursynth64"))
 		print("Creating library")
