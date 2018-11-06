@@ -21,7 +21,7 @@ def is_tool(name):
         from distutils.spawn import find_executable
         return find_executable(name) is not None
 
-SUPPORTED_VERSIONS = ('R37','R38','R39','R40','R41','R42','R42.1','R43','R44')
+SUPPORTED_VERSIONS = ('R37','R38','R39','R40','R41','R42','R42.1','R43','R44','R45')
 
 VS_PC = """prefix=%%PREFIX%% 
 exec_prefix=${prefix} 
@@ -47,14 +47,14 @@ Description: Library for interfacing VapourSynth with Python
 Version: %%VERSION%%
  
 Requires: vapoursynth 
-Requires.private: python-3.6 
+Requires.private: python-3.7
 Libs: -L${libdir} -lvapoursynth-script 
-Libs.private: -lpython36 
+Libs.private: -lpython37 
 Cflags: -I${includedir}"""
 
 
 def exitHelp():
-	print("install_vapoursynth_libs.py install/uninstall <64/32> <version> <install_prefix> <dlltool> <gendef> - e.g install_vapoursynth_libs.py 64 R44 /test/cross_compilers/....../ DLLTOOLPATH GENDEFPATH")
+	print("install_vapoursynth_libs.py install/uninstall <64/32> <version> <install_prefix> <dlltool> <gendef> - e.g install_vapoursynth_libs.py 64 R45 /test/cross_compilers/....../ DLLTOOLPATH GENDEFPATH")
 	exit(1)
 def exitVersions():
 	print("Only these versions are supported: " + " ".join(SUPPORTED_VERSIONS))
