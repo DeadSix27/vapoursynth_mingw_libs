@@ -47,9 +47,9 @@ Description: Library for interfacing VapourSynth with Python
 Version: %%VERSION%%
  
 Requires: vapoursynth 
-Requires.private: python-3.7
+Requires.private: python-%%PY_VER_DOT%%
 Libs: -L${libdir} -lvapoursynth-script 
-Libs.private: -lpython37 
+Libs.private: -lpython%%PY_VER%%
 Cflags: -I${includedir}"""
 
 
@@ -101,9 +101,14 @@ else:
 		print("Local installing binaries")
 		runCmd("cp {0} ../bin".format("VSScript.dll"))
 		runCmd("cp {0} ../bin".format("VapourSynth.dll"))
+		
 		pydName = "vapoursynth.cp36-win_amd64.pyd"
-		if ver == "R45":
+		VSS_PC = VSS_PC.replace("%%PY_VER_DOT%%","3.6").replace("%%PY_VER%%","36")
+		
+		if int(ver_suff) > 44: # Version 45 and above use python 3.7
 			pydName = "vapoursynth.cp37-win_amd64.pyd"
+			VSS_PC = VSS_PC.replace("%%PY_VER_DOT%%","3.7").replace("%%PY_VER%%","37")
+			
 		runCmd("cp {0} ../bin".format(pydName))
 		runCmd("cp {0} ../bin".format("portable.vs"))
 		runCmd("cp -r {0} ../bin/".format("vapoursynth64"))
