@@ -106,12 +106,12 @@ else:
 		runCmd("cp {0} ../bin".format("VapourSynth.dll"))
 		
 		pydName = "vapoursynth.cp36-win_amd64.pyd"
-		VSS_PC = VSS_PC.replace("%%PY_VER_DOT%%","3.6").replace("%%PY_VER%%","36")
-		
-		if int(ver_suff) > 44: # Version 45 and above use python 3.7
+		if int(ver_suff) > 44: # Version 45 and above use python 3.7		
 			pydName = "vapoursynth.cp37-win_amd64.pyd"
 			VSS_PC = VSS_PC.replace("%%PY_VER_DOT%%","3.7").replace("%%PY_VER%%","37")
-			
+		else:
+			VSS_PC = VSS_PC.replace("%%PY_VER_DOT%%","3.6").replace("%%PY_VER%%","36")
+		
 		runCmd("cp {0} ../bin".format(pydName))
 		runCmd("cp {0} ../bin".format("portable.vs"))
 		runCmd("cp -r {0} ../bin/".format("vapoursynth64"))
