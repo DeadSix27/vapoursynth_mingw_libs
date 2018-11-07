@@ -14,6 +14,7 @@
 # limitations under the License.
 # #################################################################################################################
 
+_DEBUG = False
 
 import sys,os,urllib
 
@@ -21,7 +22,7 @@ def is_tool(name):
         from distutils.spawn import find_executable
         return find_executable(name) is not None
 
-SUPPORTED_VERSIONS = ('R37','R38','R39','R40','R41','R42','R42.1','R43','R44')
+SUPPORTED_VERSIONS = ('R37','R38','R39','R40','R41','R42','R42.1','R43','R44','R45')
 
 VS_PC = """prefix=%%PREFIX%% 
 exec_prefix=${prefix} 
@@ -47,14 +48,21 @@ Description: Library for interfacing VapourSynth with Python
 Version: %%VERSION%%
  
 Requires: vapoursynth 
-Requires.private: python-3.6 
+Requires.private: python-%%PY_VER_DOT%%
 Libs: -L${libdir} -lvapoursynth-script 
-Libs.private: -lpython36 
+Libs.private: -lpython%%PY_VER%%
 Cflags: -I${includedir}"""
 
 
+def runCmd(cmd):
+	if _DEBUG:
+		print("\n--Running command in '%s': '%s'\n--" % (os.getcwd(),cmd))
+	if os.system(cmd) != 0:
+		print("Failed to execute: " + str(cmd))
+		exit(1)
+
 def exitHelp():
-	print("install_vapoursynth_libs.py install/uninstall <64/32> <version> <install_prefix> <dlltool> <gendef> - e.g install_vapoursynth_libs.py 64 R44 /test/cross_compilers/....../ DLLTOOLPATH GENDEFPATH")
+	print("install_vapoursynth_libs.py install/uninstall <64/32> <version> <install_prefix> <dlltool> <gendef> - e.g install_vapoursynth_libs.py 64 R45 /test/cross_compilers/....../ DLLTOOLPATH GENDEFPATH")
 	exit(1)
 def exitVersions():
 	print("Only these versions are supported: " + " ".join(SUPPORTED_VERSIONS))
@@ -86,34 +94,42 @@ else:
 		dlltool  = sys.argv[5]
 		gendef   = sys.argv[6]
 		
-		os.system("mkdir work")
-		os.system("mkdir bin")
+		runCmd("mkdir -p work")
+		runCmd("mkdir -p bin")
 		os.chdir("work")
 		print("Downloading")
-		os.system("wget https://github.com/vapoursynth/vapoursynth/releases/download/{0}/VapourSynth{1}-Portable-{0}.7z".format(ver,arch))
-		os.system('7z x -aoa "VapourSynth{1}-Portable-{0}.7z"'.format(ver,arch))
+		runCmd("wget https://github.com/vapoursynth/vapoursynth/releases/download/{0}/VapourSynth{1}-Portable-{0}.7z".format(ver,arch))
+		runCmd('7z x -aoa "VapourSynth{1}-Portable-{0}.7z"'.format(ver,arch))
 		
 		print("Local installing binaries")
-		os.system("cp {0} ../bin".format("VSScript.dll"))
-		os.system("cp {0} ../bin".format("VapourSynth.dll"))
-		os.system("cp {0} ../bin".format("vapoursynth.cp36-win_amd64.pyd"))
-		os.system("cp {0} ../bin".format("portable.vs"))
-		os.system("cp -r {0} ../bin/".format("vapoursynth64"))
+		runCmd("cp {0} ../bin".format("VSScript.dll"))
+		runCmd("cp {0} ../bin".format("VapourSynth.dll"))
+		
+		pydName = "vapoursynth.cp36-win_amd64.pyd"
+		if int(ver_suff) > 44: # Version 45 and above use python 3.7		
+			pydName = "vapoursynth.cp37-win_amd64.pyd"
+			VSS_PC = VSS_PC.replace("%%PY_VER_DOT%%","3.7").replace("%%PY_VER%%","37")
+		else:
+			VSS_PC = VSS_PC.replace("%%PY_VER_DOT%%","3.6").replace("%%PY_VER%%","36")
+		
+		runCmd("cp {0} ../bin".format(pydName))
+		runCmd("cp {0} ../bin".format("portable.vs"))
+		runCmd("cp -r {0} ../bin/".format("vapoursynth64"))
 		print("Creating library")
-		os.system("{0} {1}".format(gendef,"VSScript.dll"))
-		os.system("{0} -d {1} -y {2}".format(dlltool,"VSScript.def","libvapoursynth-script.a"))
-		os.system("{0} {1}".format(gendef,"VapourSynth.dll"))
-		os.system("{0} -d {1} -y {2}".format(dlltool,"VapourSynth.def","libvapoursynth.a"))
+		runCmd("{0} {1}".format(gendef,"VSScript.dll"))
+		runCmd("{0} -d {1} -y {2}".format(dlltool,"VSScript.def","libvapoursynth-script.a"))
+		runCmd("{0} {1}".format(gendef,"VapourSynth.dll"))
+		runCmd("{0} -d {1} -y {2}".format(dlltool,"VapourSynth.def","libvapoursynth.a"))
 		
 		
-		os.system("mkdir lib")
+		runCmd("mkdir lib")
 		
-		os.system("mv libvapoursynth.a lib/")
-		os.system("mv libvapoursynth-script.a lib/")
+		runCmd("mv libvapoursynth.a lib/")
+		runCmd("mv libvapoursynth-script.a lib/")
 		
 		os.chdir("lib")
 		
-		os.system("mkdir pkgconfig")
+		runCmd("mkdir pkgconfig")
 		
 		os.chdir("pkgconfig")
 		
@@ -131,29 +147,29 @@ else:
 		os.chdir("..")
 		os.chdir("..")
 		
-		os.system("mkdir include")
+		runCmd("mkdir include")
 		os.chdir("include")
 		
-		os.system("wget https://github.com/vapoursynth/vapoursynth/archive/{0}.tar.gz".format(ver))
-		os.system("tar -xvf {0}.tar.gz vapoursynth-{0}/include".format(ver))
+		runCmd("wget https://github.com/vapoursynth/vapoursynth/archive/{0}.tar.gz".format(ver))
+		runCmd("tar -xvf {0}.tar.gz vapoursynth-{0}/include".format(ver))
 		
-		os.system("mv vapoursynth-{0}/include vapoursynth".format(ver))
-		os.system("rm -r vapoursynth-{0}".format(ver))
-		os.system("rm {0}.tar.gz".format(ver))
+		runCmd("mv vapoursynth-{0}/include vapoursynth".format(ver))
+		runCmd("rm -r vapoursynth-{0}".format(ver))
+		runCmd("rm {0}.tar.gz".format(ver))
 		os.chdir("..")
 		
-		os.system("mkdir ../work2")
+		runCmd("mkdir ../work2")
 		
-		os.system("mv include ../work2")
-		os.system("mv lib ../work2")
+		runCmd("mv include ../work2")
+		runCmd("mv lib ../work2")
 		
 		os.chdir("..")
 		
 		print("Installing to " + prefix)
-		os.system("rsync -aKv work2/ {0}".format(prefix))
+		runCmd("rsync -aKv work2/ {0}".format(prefix))
 		
-		os.system("rm -r work")
-		os.system("rm -r work2")
+		runCmd("rm -r work")
+		runCmd("rm -r work2")
 		
 		
 	elif sys.argv[1] == "uninstall":
