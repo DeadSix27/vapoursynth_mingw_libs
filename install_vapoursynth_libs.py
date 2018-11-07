@@ -54,6 +54,8 @@ Cflags: -I${includedir}"""
 
 
 def runCmd(cmd):
+	if _DEBUG:
+		print("\n--Running command in '%s': '%s'\n--" % (os.getcwd(),cmd))
 	if os.system(cmd) != 0:
 		print("Failed to execute: " + str(cmd))
 		exit(1)
