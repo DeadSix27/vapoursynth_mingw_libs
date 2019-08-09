@@ -22,7 +22,7 @@ def is_tool(name):
         from distutils.spawn import find_executable
         return find_executable(name) is not None
 
-SUPPORTED_VERSIONS = ('R37','R38','R39','R40','R41','R42','R42.1','R43','R44','R45')
+SUPPORTED_VERSIONS = ('R37','R38','R39','R40','R41','R42','R42.1','R43','R44','R45','R46','R47')
 
 VS_PC = """prefix=%%PREFIX%% 
 exec_prefix=${prefix} 
@@ -147,21 +147,26 @@ else:
 		os.chdir("..")
 		os.chdir("..")
 		
-		runCmd("mkdir include")
-		os.chdir("include")
-		
-		runCmd("wget https://github.com/vapoursynth/vapoursynth/archive/{0}.tar.gz".format(ver))
-		runCmd("tar -xvf {0}.tar.gz vapoursynth-{0}/include".format(ver))
-		
-		runCmd("mv vapoursynth-{0}/include vapoursynth".format(ver))
-		runCmd("rm -r vapoursynth-{0}".format(ver))
-		runCmd("rm {0}.tar.gz".format(ver))
-		os.chdir("..")
-		
-		runCmd("mkdir ../work2")
-		
-		runCmd("mv include ../work2")
-		runCmd("mv lib ../work2")
+		if int(ver_suff) > 45:
+			runCmd("mkdir -p ../work2/include/")
+			runCmd("mv sdk/include ../work2/include/vapoursynth")
+			runCmd("mv lib ../work2")
+		else:
+			runCmd("mkdir include")
+			os.chdir("include")
+			
+			runCmd("wget https://github.com/vapoursynth/vapoursynth/archive/{0}.tar.gz".format(ver))
+			runCmd("tar -xvf {0}.tar.gz vapoursynth-{0}/include".format(ver))
+			
+			runCmd("mv vapoursynth-{0}/include vapoursynth".format(ver))
+			runCmd("rm -r vapoursynth-{0}".format(ver))
+			runCmd("rm {0}.tar.gz".format(ver))
+			os.chdir("..")
+			
+			runCmd("mkdir ../work2")
+			
+			runCmd("mv include ../work2")
+			runCmd("mv lib ../work2")
 		
 		os.chdir("..")
 		
