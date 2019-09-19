@@ -22,7 +22,7 @@ def is_tool(name):
         from distutils.spawn import find_executable
         return find_executable(name) is not None
 
-SUPPORTED_VERSIONS = ('R37','R38','R39','R40','R41','R42','R42.1','R43','R44','R45','R46','R47')
+SUPPORTED_VERSIONS = ('R37','R38','R39','R40','R41','R42','R42.1','R43','R44','R45','R46','R47','R47.1','R47.2')
 
 VS_PC = """prefix=%%PREFIX%% 
 exec_prefix=${prefix} 
