@@ -12,7 +12,6 @@
 # limitations under the License.
 # #################################################################################################################
 
-VAPOURSYNTH_VERSION = R47.2
 #64, 32
 ARCH = 64
 ifndef PREFIX
@@ -23,6 +22,10 @@ $(error GENDEF is not set)
 endif
 ifndef DLLTOOL
 $(error DLLTOOL is not set)
+endif
+
+ifndef VAPOURSYNTH_VERSION
+$(error Please set VAPOURSYNTH_VERSION, e.g R48)
 endif
 
 all:

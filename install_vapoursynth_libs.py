@@ -22,8 +22,6 @@ def is_tool(name):
         from distutils.spawn import find_executable
         return find_executable(name) is not None
 
-SUPPORTED_VERSIONS = ('R37','R38','R39','R40','R41','R42','R42.1','R43','R44','R45','R46','R47','R47.1','R47.2')
-
 VS_PC = """prefix=%%PREFIX%% 
 exec_prefix=${prefix} 
 libdir=${exec_prefix}/lib 
@@ -63,9 +61,6 @@ def runCmd(cmd):
 
 def exitHelp():
 	print("install_vapoursynth_libs.py install/uninstall <64/32> <version> <install_prefix> <dlltool> <gendef> - e.g install_vapoursynth_libs.py 64 R45 /test/cross_compilers/....../ DLLTOOLPATH GENDEFPATH")
-	exit(1)
-def exitVersions():
-	print("Only these versions are supported: " + " ".join(SUPPORTED_VERSIONS))
 	exit(1)
 	
 def simplePatch(infile,replacetext,withtext):
