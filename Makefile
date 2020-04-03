@@ -25,7 +25,7 @@ $(error DLLTOOL is not set)
 endif
 
 ifndef VAPOURSYNTH_VERSION
-$(error Please set VAPOURSYNTH_VERSION, e.g R48)
+$(error Please set VAPOURSYNTH_VERSION, e.g R49))
 endif
 
 all:
