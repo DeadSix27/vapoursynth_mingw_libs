@@ -24,7 +24,7 @@ ifndef DLLTOOL
 $(error DLLTOOL is not set)
 endif
 
-VAPOURSYNTH_VERSION = R50
+VAPOURSYNTH_VERSION = R54
 
 all:
 	@python install_vapoursynth_libs.py install $(ARCH) $(VAPOURSYNTH_VERSION) $(PREFIX) $(DLLTOOL) $(GENDEF)
