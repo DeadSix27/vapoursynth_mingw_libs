@@ -104,7 +104,7 @@ else:
 		if float(ver_suff) >= 58: # Version 53 and above use python 3.9
 			pydName = "vapoursynth.cp310-win_amd64.pyd"
 			VSS_PC = VSS_PC.replace("%%PY_VER_DOT%%","3.10").replace("%%PY_VER%%","310")
-		if float(ver_suff) >= 53: # Version 53 and above use python 3.9
+		elif float(ver_suff) >= 53: # Version 53 and above use python 3.9
 			pydName = "vapoursynth.cp39-win_amd64.pyd"
 			VSS_PC = VSS_PC.replace("%%PY_VER_DOT%%","3.9").replace("%%PY_VER%%","39")
 		elif float(ver_suff) >= 49: # Version 49 and above use python 3.8
