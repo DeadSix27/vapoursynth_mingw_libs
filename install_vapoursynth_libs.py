@@ -100,21 +100,9 @@ else:
 		runCmd("cp {0} ../bin".format("VSScript.dll"))
 		runCmd("cp {0} ../bin".format("VapourSynth.dll"))
 		
-		pydName = "vapoursynth.cp36-win_amd64.pyd"
-		if float(ver_suff) >= 58: # Version 53 and above use python 3.9
-			pydName = "vapoursynth.cp310-win_amd64.pyd"
-			VSS_PC = VSS_PC.replace("%%PY_VER_DOT%%","3.10").replace("%%PY_VER%%","310")
-		elif float(ver_suff) >= 53: # Version 53 and above use python 3.9
-			pydName = "vapoursynth.cp39-win_amd64.pyd"
-			VSS_PC = VSS_PC.replace("%%PY_VER_DOT%%","3.9").replace("%%PY_VER%%","39")
-		elif float(ver_suff) >= 49: # Version 49 and above use python 3.8
-			pydName = "vapoursynth.cp38-win_amd64.pyd"
-			VSS_PC = VSS_PC.replace("%%PY_VER_DOT%%","3.8").replace("%%PY_VER%%","38")
-		elif float(ver_suff) > 44: # Version 45 and above use python 3.7		
-			pydName = "vapoursynth.cp37-win_amd64.pyd"
-			VSS_PC = VSS_PC.replace("%%PY_VER_DOT%%","3.7").replace("%%PY_VER%%","37")
-		else:
-			VSS_PC = VSS_PC.replace("%%PY_VER_DOT%%","3.6").replace("%%PY_VER%%","36")
+
+		pydName = "vapoursynth.cp311-win_amd64.pyd"
+		VSS_PC = VSS_PC.replace("%%PY_VER_DOT%%","3.11").replace("%%PY_VER%%","311")
 		
 		runCmd("cp {0} ../bin".format(pydName))
 		runCmd("cp {0} ../bin".format("portable.vs"))
@@ -151,26 +139,21 @@ else:
 		os.chdir("..")
 		os.chdir("..")
 		
-		if float(ver_suff) > 45:
-			runCmd("mkdir -p ../work2/include/")
-			runCmd("mv sdk/include ../work2/include/vapoursynth")
-			runCmd("mv lib ../work2")
-		else:
-			runCmd("mkdir include")
-			os.chdir("include")
-			
-			runCmd("wget https://github.com/vapoursynth/vapoursynth/archive/{0}.tar.gz".format(ver))
-			runCmd("tar -xvf {0}.tar.gz vapoursynth-{0}/include".format(ver))
-			
-			runCmd("mv vapoursynth-{0}/include vapoursynth".format(ver))
-			runCmd("rm -r vapoursynth-{0}".format(ver))
-			runCmd("rm {0}.tar.gz".format(ver))
-			os.chdir("..")
-			
-			runCmd("mkdir ../work2")
-			
-			runCmd("mv include ../work2")
-			runCmd("mv lib ../work2")
+		runCmd("mkdir include")
+		os.chdir("include")
+
+		runCmd("wget https://github.com/vapoursynth/vapoursynth/archive/{0}.tar.gz".format(ver))
+		runCmd("tar -xvf {0}.tar.gz vapoursynth-{0}/include".format(ver))
+
+		runCmd("mv vapoursynth-{0}/include vapoursynth".format(ver))
+		runCmd("rm -r vapoursynth-{0}".format(ver))
+		runCmd("rm {0}.tar.gz".format(ver))
+		os.chdir("..")
+
+		runCmd("mkdir ../work2")
+
+		runCmd("mv include ../work2")
+		runCmd("mv lib ../work2")
 		
 		os.chdir("..")
 		
