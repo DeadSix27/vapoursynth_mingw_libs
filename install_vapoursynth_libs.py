@@ -108,7 +108,9 @@ else:
 		runCmd("cp {0} ../bin".format("portable.vs"))
 		runCmd("cp -r {0} ../bin/".format("vapoursynth64"))
 		print("Creating library")
-
+		
+		runCmd("{0} {1}".format(gendef,"VSScript.dll"))
+		runCmd("{0} {1}".format(gendef,"VapourSynth.dll"))
 		runCmd(f"{dlltool} -m i386:x86-64 -D VSScript.dll -d VSScript.def -l libvapoursynth-script.a")
 		runCmd(f"{dlltool} -m i386:x86-64 -D VapourSynth.dll -d VapourSynth.def -l libvapoursynth.a")
 		
